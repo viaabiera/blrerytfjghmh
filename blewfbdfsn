@@ -1,0 +1,41 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;	ECE 109 - Fall 2018
+;   add3.asm
+;	Computes the sum of every third number between two 2-digit integers entered by a user
+;	11-4-2018
+;	James Wittenborn
+;
+	.ORIG	x3000
+
+	
+	LEA R0, PROMPT1 ; print first string
+	PUTS
+	
+; Starting Number
+	LOOP	
+	GETC ; Get first character
+	ST R1, START1
+	OUT ; Echo first character
+	GETC
+	ST R2, START2 ; 	Get second character and subtract 48 for ASCII to Decimal
+	ADD R2, R0, x0 
+	ADD R2, R2, #-16
+	ADD R2, R2, #-16
+	ADD R2, R2, #-16
+	ADD R2, R2, #-9
+	BRnz NEXT
+	NEXT 
+	OUT  ; Echo second character
+	LD R0, NL	; newline
+	OUT
+HALT
+
+	
+	
+	
+	PROMPT1	.STRINGZ	"Enter Start Number > " ; first prompt
+	START1 .BLKW 1 ; get first digit
+	START2 .BLKW 2 ; get first digit
+	NL	.FILL x0A ; declare newline hex value
+	
+	.END
